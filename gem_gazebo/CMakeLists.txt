@@ -31,7 +31,6 @@ find_package(ros2_controllers REQUIRED)
 find_package(position_controllers REQUIRED)
 find_package(velocity_controllers REQUIRED)
 find_package(joint_state_broadcaster REQUIRED)
-find_package(rviz_2d_overlay_msgs REQUIRED)
 
 # Install Python scripts
 
