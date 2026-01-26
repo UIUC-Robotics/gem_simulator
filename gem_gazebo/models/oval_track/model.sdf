@@ -1,0 +1,23 @@
+<sdf version="1.10">
+  <model name="oval_track">
+    <static>true</static>
+
+    <link name="link">
+      <visual name="visual">
+        <geometry>
+          <mesh>
+            <uri>model://oval_track/meshes/oval_track.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://oval_track/meshes/oval_track.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+  </model>
+</sdf>

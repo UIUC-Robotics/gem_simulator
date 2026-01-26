@@ -1,0 +1,25 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 30
+    use_sim_time: true
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    left_steering_controller:
+      type: position_controllers/JointGroupPositionController
+
+    right_steering_controller:
+      type: position_controllers/JointGroupPositionController
+
+    left_front_wheel_controller:
+      type: velocity_controllers/JointGroupVelocityController
+
+    right_front_wheel_controller:
+      type: velocity_controllers/JointGroupVelocityController
+      
+    left_rear_wheel_controller:
+      type: velocity_controllers/JointGroupVelocityController
+      
+    right_rear_wheel_controller:
+      type: velocity_controllers/JointGroupVelocityController 

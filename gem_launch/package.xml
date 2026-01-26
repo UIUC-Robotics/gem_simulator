@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>gem_launch</name>
+  <version>1.0.0</version>
+  <description>The gem_launch is used to launch GEM simulator</description>
+  <author email="hangcui1201@gmail.com">Hang Cui</author>
+  <maintainer email="hangcui1201@gmail.com">Hang Cui</maintainer>
+  <url type="repository">https://github.com/hangcui1201/POLARIS_GEM_e2_Simulator.git</url>
+  <license>BSD</license>
+  
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  
+  <depend>gem_description</depend>
+  <depend>gem_gazebo</depend>
+  <depend>launch_ros</depend>
+  <depend>ros_gz_sim</depend>
+  <depend>ros_gz_bridge</depend>
+  
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

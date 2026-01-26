@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="namespace" default="/"/>
+  <arg name="cmd_timeout" default="0.5"/>
+  <arg name="paused" default="false"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="gui" default="true"/>
+  <arg name="headless" default="false"/>
+  <arg name="debug" default="false"/>
+  <arg name="verbose" default="false"/>
+
+  <!-- Vehicle pose -->
+  <arg name="x" default="0.0"/>
+  <arg name="y" default="-98.0"/>
+  <arg name="z" default="0.3"/>
+  <arg name="yaw" default="0.0"/>
+  <arg name="roll" default="0.0"/>
+  <arg name="pitch" default="0.0"/>
+
+  <include file="$(find-pkg-share gem_description)/launch/gem_description.launch.py">
+    <arg name="namespace" value="$(var namespace)"/>
+  </include>
+
+  <group>
+    <push-ros-namespace namespace="$(var namespace)"/>
+
+    <node pkg="ros_gz_sim" exec="create" name="spawn_model"
+          args="-topic robot_description -name gem -allow_renaming true -x $(var x) -y $(var y) -z $(var z) -R $(var roll) -P $(var pitch) -Y $(var yaw)"/>
+
+    <!-- We do not need the ros2_control_node when using gz_ros2_control -->
+
+    <!-- Load controllers -->
+    <node pkg="controller_manager" exec="spawner" name="controller_spawner"
+          args="joint_state_broadcaster
+                left_steering_controller
+                right_steering_controller
+                left_front_wheel_controller
+                right_front_wheel_controller
+                left_rear_wheel_controller
+                right_rear_wheel_controller"/>
+
+    <!-- Control the steering, axle joints. -->
+    <node pkg="gem_gazebo" exec="gem_control.py" name="ackermann_controller">
+      <param name="cmd_timeout" value="$(var cmd_timeout)"/>
+      <param from="$(find-pkg-share gem_gazebo)/config/gem_ackermann_control_params_ros2.yaml"/>
+    </node>
+
+  </group>
+
+</launch>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

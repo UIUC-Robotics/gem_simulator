@@ -1,0 +1,313 @@
+<?xml version="1.0" ?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  
+  <gazebo reference="right_fixed_hinge_link">
+    <material>Gazebo/Red</material>
+  </gazebo>
+
+  <gazebo reference="left_fixed_hinge_link">
+    <material>Gazebo/Red</material>
+  </gazebo>
+  
+  <gazebo reference="right_steering_hinge_link">
+    <mu1>10000</mu1>
+    <mu2>100000000</mu2>
+    <kp>1000000</kp>
+    <kd>1e8</kd>
+    <minDepth>0.001</minDepth>
+    <maxVel>100.0</maxVel>
+    <material>Gazebo/Blue</material>
+  </gazebo>
+
+  <gazebo reference="left_steering_hinge_link">
+    <mu1>10000</mu1>
+    <mu2>100000000</mu2>
+    <kp>1000000</kp>
+    <kd>1e8</kd>
+    <minDepth>0.001</minDepth>
+    <maxVel>100.0</maxVel>
+    <material>Gazebo/Blue</material>
+  </gazebo>
+
+  <gazebo reference="front_left_wheel_link">
+    <mu1>0.9</mu1>
+    <mu2>1000000</mu2>
+    <minDepth>0.005</minDepth>
+    <kp>1e8</kp>
+    <material>Gazebo/Black</material>
+  </gazebo>
+
+  <gazebo reference="front_right_wheel_link">
+    <mu1>0.9</mu1>
+    <mu2>1000000</mu2>
+    <minDepth>0.005</minDepth>
+    <kp>1e8</kp>
+    <material>Gazebo/Black</material>
+  </gazebo>
+  
+
+  <gazebo reference="rear_left_wheel_link">
+    <mu1>0.9</mu1>
+    <mu2>1000000</mu2>
+    <minDepth>0.005</minDepth>
+    <kp>1e8</kp>
+    <material>Gazebo/Black</material>
+  </gazebo>
+
+  <gazebo reference="rear_right_wheel_link">
+    <mu1>0.9</mu1>
+    <mu2>1000000</mu2>
+    <minDepth>0.005</minDepth>
+    <kp>1e8</kp>
+    <material>Gazebo/Black</material>
+  </gazebo>  
+
+
+  <!-- ************************************** --> 
+
+  <!-- colors used by Gazebo -->
+
+  <gazebo reference="base_link">
+    <material>Gazebo/White</material>
+  </gazebo>
+
+  <gazebo reference="chair_link">
+    <material>Gazebo/Grey</material>
+  </gazebo>
+
+  <gazebo reference="door_link">
+    <material>Gazebo/White</material>
+  </gazebo>
+
+  <!--
+  <gazebo reference="front_camera_link">
+    <material>Gazebo/Black</material>
+  </gazebo>
+  -->
+
+  <gazebo reference="front_rack_link">
+    <material>Gazebo/Black</material>
+  </gazebo>
+
+  <gazebo reference="rear_rack_link">
+    <material>Gazebo/Black</material>
+  </gazebo>
+
+  <gazebo reference="top_rack_link">
+    <material>Gazebo/Black</material>
+  </gazebo>
+
+  <gazebo reference="front_left_emergency_button_link">
+    <material>Gazebo/Red</material>
+  </gazebo>
+
+  <gazebo reference="front_right_emergency_button_link">
+    <material>Gazebo/Red</material>
+  </gazebo>
+
+  <gazebo reference="rear_left_emergency_button_link">
+    <material>Gazebo/Red</material>
+  </gazebo>
+
+  <gazebo reference="rear_right_emergency_button_link">
+    <material>Gazebo/Red</material>
+  </gazebo>
+
+  <gazebo reference="rear_left_light_link">
+    <material>Gazebo/Red</material>
+  </gazebo>
+
+  <gazebo reference="rear_right_light_link">
+    <material>Gazebo/Red</material>
+  </gazebo>
+
+  <gazebo reference="rear_light_bar_link">
+    <material>Gazebo/Red</material>
+  </gazebo>
+
+  <gazebo reference="front_left_head_light_link">
+    <material>Gazebo/White</material>
+  </gazebo>
+
+  <gazebo reference="front_left_head_light_link">
+    <material>Gazebo/White</material>
+  </gazebo>
+
+  <gazebo reference="front_left_turn_light_link">
+    <material>Gazebo/Orange</material>
+  </gazebo>
+
+  <gazebo reference="front_right_turn_light_link">
+    <material>Gazebo/Orange</material>
+  </gazebo>
+
+  <gazebo reference="left_I_link">
+    <material>Gazebo/Orange</material>
+  </gazebo>
+
+  <gazebo reference="right_I_link">
+    <material>Gazebo/Orange</material>
+  </gazebo>
+
+  <gazebo reference="left_blue_outer_link">
+    <material>Gazebo/Blue</material>
+  </gazebo>
+
+  <gazebo reference="right_blue_outer_link">
+    <material>Gazebo/Blue</material>
+  </gazebo>
+
+  <gazebo reference="left_antenna_link">
+    <material>Gazebo/Grey</material>
+  </gazebo>
+
+  <gazebo reference="right_antenna_link">
+    <material>Gazebo/Grey</material>
+  </gazebo>
+
+  <gazebo reference="rear_left_stop_light_link">
+    <material>Gazebo/Red</material>
+  </gazebo>
+
+  <gazebo reference="rear_right_stop_light_link">
+    <material>Gazebo/Red</material>
+  </gazebo>
+
+  <gazebo reference="front_single_camera_link">
+    <material>Gazebo/Red</material>
+  </gazebo>
+
+  <gazebo reference="IMU_link">
+    <material>Gazebo/Red</material>
+  </gazebo>
+
+  <gazebo reference="front_sonar_link">
+    <material>Gazebo/Orange</material>
+  </gazebo>
+
+  <gazebo reference="rear_sonar_link">
+    <material>Gazebo/Orange</material>
+  </gazebo>
+
+  <gazebo reference="stereo_camera_link">
+    <material>Gazebo/Red</material>
+  </gazebo>
+ 
+  <gazebo>
+    <plugin name="gz_ros2_control::GazeboSimROS2ControlPlugin" filename="libgz_ros2_control-system.so">
+      <parameters>$(find gem_gazebo)/config/gem_joint_control_params_ros2.yaml</parameters>
+    </plugin>
+  </gazebo>
+
+
+  <!-- ***************************** camera ***************************** -->
+
+  <gazebo reference="front_single_camera_link">
+    <sensor type="camera" name="front_single_camera_sensor">
+      <update_rate>30.0</update_rate>
+      <camera>
+      <!--
+      <camera name="front_single_camera"> 
+      -->
+        <horizontal_fov>1.5707963</horizontal_fov>
+        <image>
+          <width>640</width>
+          <height>480</height>
+          <!--
+          <width>960</width>
+          <height>540</height>
+          -->
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.02</near>
+          <far>300</far>
+        </clip>
+        <noise>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.007</stddev>
+        </noise>
+      </camera>
+      <topic>front_single_camera/image_raw</topic>
+      <camera_info_topic>front_single_camera/camera_info</camera_info_topic>
+      <gz_frame_id>front_single_camera_link</gz_frame_id>
+    </sensor>
+  </gazebo>
+
+  <!-- ***************************** IMU ***************************** -->
+  
+<gazebo reference="IMU_link">
+  <sensor name="imu_sensor" type="imu">
+    <always_on>true</always_on>
+    <update_rate>50</update_rate>
+
+    <imu>
+      <noise type="gaussian">
+        <mean>0.0</mean>
+        <stddev>0.001</stddev>
+      </noise>
+    </imu>
+
+    <topic>imu</topic>
+  </sensor>
+</gazebo>
+  
+  <!-- ***************************** GPS ***************************** -->
+  
+ <gazebo reference="GPS_link">
+  <sensor name="gps_sensor" type="navsat">
+    <always_on>true</always_on>
+    <update_rate>20</update_rate>
+
+    <navsat>
+      <!-- World reference (optional but recommended) -->
+      <reference>
+        <latitude_deg>37.4275</latitude_deg>
+        <longitude_deg>-122.1697</longitude_deg>
+        <altitude>30.0</altitude>
+      </reference>
+
+      <position>
+        <horizontal>
+          <noise type="gaussian">
+            <mean>0.0</mean>
+            <stddev>0.05</stddev>
+          </noise>
+        </horizontal>
+
+        <vertical>
+          <noise type="gaussian">
+            <mean>0.0</mean>
+            <stddev>0.05</stddev>
+          </noise>
+        </vertical>
+      </position>
+    </navsat>
+
+    <topic>/gps/fix</topic>
+  </sensor>
+</gazebo>
+</robot>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

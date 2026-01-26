@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>gem_gazebo</name>
+  <version>1.0.0</version>
+  <description>The gem_gazebo is used with Gazebo to simulate gem vehicle with Ackermann steering</description>
+  <author email="hangcui1201@gmail.com">Hang Cui</author>
+  <maintainer email="hangcui1201@gmail.com">Hang Cui</maintainer>
+  <url type="repository">https://github.com/hangcui1201/POLARIS_GEM_e2_Simulator.git</url>
+  <license>BSD</license>
+  
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <buildtool_depend>ament_cmake_python</buildtool_depend>
+  
+  <depend>cv_bridge</depend>
+  <depend>rclcpp</depend>
+  <depend>rclpy</depend>
+  <depend>sensor_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>ackermann_msgs</depend>
+  <depend>std_msgs</depend>
+  <depend>ros_gz_sim</depend>
+  <depend>ros_gz_bridge</depend>
+  <depend>gem_description</depend>
+  <depend>controller_manager</depend>
+  <depend>controller_manager_msgs</depend>
+  <depend>tf2_ros</depend>
+  <depend>gz_ros2_control</depend>
+  <depend>ros2_control</depend>
+  <depend>ros2_controllers</depend>
+  <depend>position_controllers</depend>
+  <depend>velocity_controllers</depend>
+  <depend>joint_state_broadcaster</depend>
+  <depend>rviz_2d_overlay_msgs</depend>
+  
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
