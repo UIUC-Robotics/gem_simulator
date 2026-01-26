@@ -31,7 +31,7 @@
   <depend>position_controllers</depend>
   <depend>velocity_controllers</depend>
   <depend>joint_state_broadcaster</depend>
-  <depend>rviz_2d_overlay_msgs</depend>
+  <!-- <depend>rviz_2d_overlay_msgs</depend> -->
   
   <export>
     <build_type>ament_cmake</build_type>

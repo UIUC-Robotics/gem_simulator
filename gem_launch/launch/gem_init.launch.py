@@ -45,11 +45,11 @@ def generate_launch_description():
         default_value='false',
         description='Enable debug mode'
     )
-    default_world_name = PathJoinSubstitution([FindPackageShare('gem_gazebo'), 'worlds', 'empty.world'])
+    default_world_name = PathJoinSubstitution([FindPackageShare('gem_gazebo'), 'worlds', 'oval_track.world'])
     world_name_arg = DeclareLaunchArgument(
         'world_name',
         default_value=default_world_name,
-        description='Name of the world file to load (default: empty.world)'
+        description='Name of the world file to load (default: oval_track.world)'
     )
     
     x_arg = DeclareLaunchArgument(
@@ -60,7 +60,7 @@ def generate_launch_description():
     
     y_arg = DeclareLaunchArgument(
         'y',
-        default_value='0.0',
+        default_value='-11.93',
         description='Initial y position'
     )
     
@@ -91,11 +91,11 @@ def generate_launch_description():
 
     from launch.substitutions import TextSubstitution
     
-    # Set GZ_SIM_RESOURCE_PATH to gem_gazebo models directory
-    # set_gz_resource_path = SetEnvironmentVariable(
-    #     'GZ_SIM_RESOURCE_PATH',
-    #     PathJoinSubstitution([FindPackageShare('gem_gazebo'), 'models'])
-    # )
+    # Set GZ_SIM_RESOURCE_PATH so model://oval_track in oval_track.world can be found
+    set_gz_resource_path = SetEnvironmentVariable(
+        'GZ_SIM_RESOURCE_PATH',
+        PathJoinSubstitution([FindPackageShare('gem_gazebo'), 'models'])
+    )
     set_gz_version = SetEnvironmentVariable(
         name='GZ_SIM_VERSION',
         value='ignition'  # or your installed version
@@ -191,7 +191,7 @@ def generate_launch_description():
         start_rviz_arg,
         
         # Environment variables
-        # set_gz_resource_path,
+        set_gz_resource_path,
         set_gz_version,
 
         
