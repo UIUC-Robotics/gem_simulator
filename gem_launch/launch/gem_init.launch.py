@@ -45,11 +45,11 @@ def generate_launch_description():
         default_value='false',
         description='Enable debug mode'
     )
-    default_world_name = PathJoinSubstitution([FindPackageShare('gem_gazebo'), 'worlds', 'oval_track.world'])
+    default_world_name = PathJoinSubstitution([FindPackageShare('gem_gazebo'), 'worlds', 'smaller_track.world'])
     world_name_arg = DeclareLaunchArgument(
         'world_name',
         default_value=default_world_name,
-        description='Name of the world file to load (default: oval_track.world)'
+        description='Name of the world file to load (default: smaller_track.world)'
     )
     
     x_arg = DeclareLaunchArgument(
@@ -60,7 +60,7 @@ def generate_launch_description():
     
     y_arg = DeclareLaunchArgument(
         'y',
-        default_value='-11.93',
+        default_value='0.0',
         description='Initial y position'
     )
     

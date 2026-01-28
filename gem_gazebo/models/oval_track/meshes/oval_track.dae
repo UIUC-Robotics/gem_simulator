@@ -98,7 +98,7 @@
   </library_effects>
   <library_images>
     <image id="track_albedo_png" name="track_albedo_png">
-      <init_from>track_albedo.png</init_from>
+      <init_from>../materials/textures/track_albedo.png</init_from>
     </image>
   </library_images>
   <library_materials>

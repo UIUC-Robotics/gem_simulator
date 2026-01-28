@@ -205,7 +205,7 @@ class GEMController(Node):
                 attempt += 1
                 self.get_logger().warn(f"Failed to lookup transform: {str(e)}, attempt {attempt}/{max_attempts}")
                 if attempt >= max_attempts:
-                    self.get_logger().error(f"Failed to lookup transform after {max_attempts} attempts, returning zeros")
+                    self.get_logger().warn(f"Failed to lookup transform after {max_attempts} attempts, returning zeros")
                     # Return zeros as a fallback to prevent complete failure
                     return np.array([0.0, 0.0, 0.0])
                 rclpy.spin_once(self, timeout_sec=retry_delay)
