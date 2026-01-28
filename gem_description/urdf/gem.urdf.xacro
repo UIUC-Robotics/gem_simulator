@@ -1414,7 +1414,7 @@
   </link>
 
   <joint name="velodyne_joint" type="fixed">
-    <origin xyz="0.02 0.115 -0.6575" rpy="1.5708 0 3.1416" />
+    <origin xyz="0.02 0.15 -0.6575" rpy="1.5708 0 3.1416" />
     <parent link="top_rack_link"/>
     <child link="velodyne_link"/>
   </joint>
@@ -1426,6 +1426,7 @@
       <pose>0 0 0 0 0 0</pose>
       <visualize>false</visualize>
       <update_rate>10</update_rate>
+      <always_on>true</always_on>
       <lidar>
         <scan>
           <horizontal>
@@ -1452,7 +1453,7 @@
           <stddev>0.0</stddev>
         </noise>
       </lidar>
-      <topic>scan</topic>
+      <topic>/scan</topic>
       <gz_frame_id>velodyne_link</gz_frame_id>
     </sensor>
   </gazebo>
