@@ -1523,11 +1523,6 @@
     </joint>
   </ros2_control>
 
-  <!-- <gazebo>
-    <plugin name="gz_ros2_control::GazeboSimROS2ControlPlugin" filename="libgz_ros2_control-system.so">
-      <parameters>$(find gem_gazebo)/config/gem_joint_control_params_ros2.yaml</parameters>
-    </plugin>
-  </gazebo> -->
 
 </robot>
 
