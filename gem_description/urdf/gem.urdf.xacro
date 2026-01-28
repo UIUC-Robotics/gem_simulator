@@ -1334,15 +1334,6 @@
     <child link="GPS_link"/>
   </joint>
 
-    <gazebo reference="GPS_link">  <!-- navsat_link -->
-    <sensor name="GPS" type="navsat">
-      <always_on>1</always_on>
-      <update_rate>10</update_rate>
-      <topic>navsat</topic>
-      <gz_frame_id>GPS_link</gz_frame_id>
-    </sensor>
-  </gazebo>
-
   <!-- Front Sonar -->
   <link name="front_sonar_link">
     <inertial>

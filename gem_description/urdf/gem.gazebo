@@ -261,31 +261,38 @@
     <update_rate>20</update_rate>
 
     <navsat>
-      <!-- World reference (optional but recommended) -->
-      <reference>
-        <latitude_deg>37.4275</latitude_deg>
-        <longitude_deg>-122.1697</longitude_deg>
-        <altitude>30.0</altitude>
-      </reference>
-
-      <position>
+      <position_sensing>
         <horizontal>
           <noise type="gaussian">
             <mean>0.0</mean>
-            <stddev>0.05</stddev>
+            <stddev>0.000166667</stddev>
           </noise>
         </horizontal>
-
         <vertical>
           <noise type="gaussian">
             <mean>0.0</mean>
-            <stddev>0.05</stddev>
+            <stddev>0.000166667</stddev>
           </noise>
         </vertical>
-      </position>
+      </position_sensing>
+      <velocity_sensing>
+        <horizontal>
+          <noise type="gaussian">
+            <mean>0.0</mean>
+            <stddev>0.1</stddev>
+          </noise>
+        </horizontal>
+        <vertical>
+          <noise type="gaussian">
+            <mean>0.0</mean>
+            <stddev>0.1</stddev>
+          </noise>
+        </vertical>
+      </velocity_sensing>
     </navsat>
 
-    <topic>/gps/fix</topic>
+    <topic>/navsat</topic>
+    <gz_frame_id>GPS_link</gz_frame_id>
   </sensor>
 </gazebo>
 </robot>
