@@ -45,11 +45,10 @@ def generate_launch_description():
         default_value='false',
         description='Enable debug mode'
     )
-    default_world_name = PathJoinSubstitution([FindPackageShare('gem_gazebo'), 'worlds', 'smaller_track.world'])
     world_name_arg = DeclareLaunchArgument(
         'world_name',
-        default_value=default_world_name,
-        description='Name of the world file to load (default: smaller_track.world)'
+        default_value='smaller_track.world',
+        description='World filename to load from gem_gazebo/worlds/ (e.g. silverstone.world, default: smaller_track.world)'
     )
     
     x_arg = DeclareLaunchArgument(
@@ -100,6 +99,8 @@ def generate_launch_description():
         name='GZ_SIM_VERSION',
         value='ignition'  # or your installed version
     )
+    # Full path to world file so Gazebo can find it when user passes e.g. world_name:=silverstone.world
+    world_path = PathJoinSubstitution([FindPackageShare('gem_gazebo'), 'worlds', world_name])
     gazebo_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             PathJoinSubstitution([
@@ -108,7 +109,7 @@ def generate_launch_description():
                 'gz_sim.launch.py'
             ])
         ]),
-        launch_arguments={'gz_args': ['-r -v1 ', world_name],
+        launch_arguments={'gz_args': ['-r -v1 ', world_path],
         'on_exit_shutdown': 'true'
         }.items()
     )

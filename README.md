@@ -10,19 +10,27 @@ This project features the simulation of a Polaris Gem E2 vehicle with **Ackerman
 
 - [Ackermann Steering Vehicle Simulation in ROS2 with Gazebo Sim Ignition](#ackermann-steering-vehicle-simulation-in-ros2-with-gazebo-sim-ignition)
 - [Features](#features)
+
   - [1 Ackermann Steering](#1-ackermann-steering)
   - [2 ROS2 Communication](#2-ros2-communication)
   - [3 Sensors](#3-sensors)
+
   <!-- - [4 Navigation](#4-navigation) -->
+
   <!-- - [5 Manual Control with external joystick](#5-manual-control-with-external-joystick) -->
+
   - [4 Visualization](#6-visualization)
 - [Requirements](#requirements)
 - [Local Installation](#local-installation)
 - [Docker Installation](#docker-installation)
 - [Usage](#usage)
+
   - [1 Basic Simulation and Manual Control](#1-basic-simulation-and-manual-control)
+
   <!-- - [2 SLAM Simultaneous Localization and Mapping](#2-slam-simultaneous-localization-and-mapping) -->
+
   <!-- - [3 Navigation with Nav2](#3-navigation-with-nav2) -->
+
 <!-- - [Future Work](#future-work)
 - [Gallery](#gallery)
 - [TF Tree](#tf-tree) -->
@@ -43,10 +51,13 @@ This project features the simulation of a Polaris Gem E2 vehicle with **Ackerman
 - **Odometry**: Ensures accurate vehicle state feedback.
 - **LiDAR**: Mounted for obstacle detection and environmental scanning. Supports 3D point cloud generation for advanced perception tasks.
 - **Cameras**:
+
   - Front-facing
+
   <!-- - Rear-facing
   - Left-side
   - Right-side -->
+
   <!-- > **Note:** By default, only the front camera is bridged to ROS 2.If you want to use all cameras (left, right, rear) in ROS 2,remove the `#` at the beginning of the relevant camera sections in `saye_bringup/config/ros_gz_bridge.yaml` to activate them  (e.g., `/camera/left_raw`, `/camera/right_raw`, `/camera/rear_raw`). -->
 
 <!-- ### 4. **Navigation**
@@ -69,93 +80,38 @@ This project features the simulation of a Polaris Gem E2 vehicle with **Ackerman
 - **ROS2 (Humble)**
 - **Gazebo Sim Ignition**
 - **RViz2**
-<!-- - **Nav2** -->
 - **ROS2_CONTROL**
 
 ## Local Installation
 
-0. Your need to sure that installation of Gazebo Ignition and ROS (ros_gz) for ros2 humble:<br>
-   `sudo apt-get install ros-${ROS_DISTRO}-ros-gz`<br>
-   `sudo apt-get install ros-humble-ros-gz` (Only Humble version)<br>
-   `sudo apt-get install ros-humble-gz-ros2-control ros-humble-gz-ros2-control-demos` <br>
+0. Your need to sure that installation of Gazebo Ignition and ROS (ros_gz) for ros2 humble:`<br>`
+   `sudo apt-get install ros-${ROS_DISTRO}-ros-gz<br>`
+   `sudo apt-get install ros-${ROS_DISTRO}-gz-ros2-control<br>`
 
-   More details about installation Gazebo and ROS: <a href="https://gazebosim.org/docs/latest/ros_installation/">Link</a>
-1. Clone the repository:<br>
-   `mkdir -p gem_sim/src && cd gem_sim/src`<br>
-   `git clone https://github.com/UIUC-Robotics/gem_simulator.git`<br>`cd ..`
+   More details about installation Gazebo and ROS: `<a href="https://gazebosim.org/docs/latest/ros_installation/">`Link `</a>`
+1. Clone the repository:`<br>`
+   `mkdir -p gem_sim/src && cd gem_sim/src<br>`
+   `git clone https://github.com/UIUC-Robotics/gem_simulator.git<br>``cd ..`
 2. Build the project:
    `colcon build --symlink-install && source install/setup.bash`
-3. Set environment variables:
-   ```bash
-   # Set environment variables for current session
-   export GZ_SIM_RESOURCE_PATH=$GZ_SIM_RESOURCE_PATH:/path/to/your/workspace
-   export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:/path/to/your/workspace
-   ```
-
-   **For Permanent Setup:**
-   
-   To make these environment variables permanent, add them to your `.bashrc` file:
-   ```bash
-   # Add environment variables to .bashrc
-   echo 'export GZ_SIM_RESOURCE_PATH=$GZ_SIM_RESOURCE_PATH:/path/to/your/workspace' >> ~/.bashrc
-   echo 'export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:/path/to/your/workspace' >> ~/.bashrc
-   
-   # Apply changes
-   source ~/.bashrc
-   ```
-
-   > **Note:** Replace `/your/path/` with your actual installation path.
-
-<!-- ## Docker Installation
-
-You can also run the simulation using Docker, which ensures a consistent environment across different systems. -->
-
-<!-- ### Prerequisites
-- Docker
-- NVIDIA Container Toolkit (for GPU support)
-
-### Steps to Run with Docker
-
-1. Clone the repository:
-   ```bash
-   mkdir -p ackermann_sim/src && cd ackermann_sim/src
-   git clone https://github.com/alitekes1/ackermann-vehicle-gzsim-ros2
-   cd ackermann-vehicle-gzsim-ros2
-   ```
-
-2. Build and run the Docker container:
-   ```bash
-      docker run -it \
-      --name ackermann_sim \
-      --hostname ackermann_sim \
-      --env="DISPLAY=$DISPLAY" \
-      --env="QT_X11_NO_MITSHM=1" \
-      --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
-      --privileged alitekes1/ackermann_sim:latest
-   ```
-
-3. If you want to additional terminal for same container
-   ```bash
-      docker exec -it ackermann_sim bash
-   ```
-
-   
-> **Note:** Inside the container, you can run the simulation commands as normal. -->
 
 ## Usage
 
 ### 1. Basic Simulation and Manual Control
 
-1.  Launch the simulation:
-    ```bash
-    ros2 launch gem_launch gem_init.launch.py
-    ```
-2.  Control car:
-    ```bash
-    # in different terminal
-    ros2 topic pub -r 10 /ackermann_cmd ackermann_msgs/msg/AckermannDrive \
-    "{steering_angle: 0.35, steering_angle_velocity: 0.5, speed: 1.0, acceleration: 0.5}"
-    ```
+1. Launch the simulation:
+   ```bash
+   ros2 launch gem_launch gem_init.launch.py
+
+   # or to specify the world
+   ros2 launch gem_launch gem_init.launch.py world_name:=silverstone.world
+   ```
+2. Control car:
+   ```bash
+   # in different terminal
+   ros2 topic pub -r 10 /ackermann_cmd ackermann_msgs/msg/AckermannDrive \
+   "{steering_angle: 0.35, steering_angle_velocity: 0.5, speed: 1.0, acceleration: 0.5}"
+   ```
 
 <!-- ### 2. SLAM (Simultaneous Localization and Mapping)
 
