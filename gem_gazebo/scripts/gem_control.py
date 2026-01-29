@@ -90,9 +90,9 @@ class GEMController(Node):
         rrw = np.array([0.0] * 3)
 
         self.steer_joint_dist_div_2 = np.linalg.norm(ls-rs)/2.0
-        # self.wheelbase = np.linalg.norm((ls+rs)/2.0 - (lrw+rrw)/2.0) //TODO: get wheelbase from Transforms
-        self.wheelbase = 1.75
-        self.get_logger().warn(f"Wheelbase set to 1.75 = {self.wheelbase}")
+        self.wheelbase = np.linalg.norm((ls+rs)/2.0 - (lrw+rrw)/2.0)
+        # self.wheelbase = 1.75
+        self.get_logger().info(f"Wheelbase set to {self.wheelbase:.2f} using transforms")
         self.wheelbase_inv = 1 / (self.wheelbase*1.0)
         self.wheelbase_sqr = self.wheelbase**2
 
@@ -198,14 +198,14 @@ class GEMController(Node):
         while attempt < max_attempts:
             try:
                 # Wait for transform to be available with a timeout
-                self.get_logger().info(f"Looking up transform from {reference_frame} to {link}")
+                # self.get_logger().info(f"Looking up transform from {reference_frame} to {link}")
                 trans = self.tf_buffer.lookup_transform(reference_frame, link, rclpy.time.Time())
                 return np.array([trans.transform.translation.x, trans.transform.translation.y, trans.transform.translation.z])
             except Exception as e:
                 attempt += 1
-                self.get_logger().warn(f"Failed to lookup transform: {str(e)}, attempt {attempt}/{max_attempts}")
+                self.get_logger().info(f"Waiting for transform: {str(e)}, attempt {attempt}/{max_attempts}")
                 if attempt >= max_attempts:
-                    self.get_logger().warn(f"Failed to lookup transform after {max_attempts} attempts, returning zeros")
+                    self.get_logger().error(f"Could not get transform after {max_attempts} attempts, returning zeros, check if model spawned")
                     # Return zeros as a fallback to prevent complete failure
                     return np.array([0.0, 0.0, 0.0])
                 rclpy.spin_once(self, timeout_sec=retry_delay)

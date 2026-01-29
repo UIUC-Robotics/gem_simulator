@@ -6,7 +6,7 @@ Spawns the GEM vehicle and starts controllers
 """
 
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, GroupAction
+from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, GroupAction, TimerAction
 from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node, PushRosNamespace
@@ -152,13 +152,19 @@ def generate_launch_description():
             ackermann_params_file
         ]
     )
+
+    # Delay gem_control until after spawn + controller_spawner (model and controllers must be up)
+    delayed_ackermann = TimerAction(
+        period=2.0,
+        actions=[ackermann_controller]
+    )
     
-    # Group nodes with namespace
+    # Group nodes with namespace: spawn first, then load controllers, then start gem_control after delay
     vehicle_group = GroupAction([
         PushRosNamespace(namespace),
         spawn_entity,
         controller_spawner,
-        ackermann_controller,
+        delayed_ackermann,
     ])
     
     return LaunchDescription([
