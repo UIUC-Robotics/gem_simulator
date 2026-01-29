@@ -40,7 +40,7 @@
     </scene>
     <include>
       <uri>model://silverstone</uri>
-      <pose>0 1.5 0 0 0 -0.9</pose>
+      <pose>0 0 0 0 0 -0.9</pose>
     </include>
     <light name='sun' type='directional'>
       <pose>0 0 10 0 0 0</pose>

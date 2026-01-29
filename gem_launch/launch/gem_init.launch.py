@@ -59,7 +59,7 @@ def generate_launch_description():
     
     y_arg = DeclareLaunchArgument(
         'y',
-        default_value='0.0',
+        default_value='-3.0',
         description='Initial y position'
     )
     
