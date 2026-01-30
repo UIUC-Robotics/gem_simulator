@@ -177,6 +177,23 @@ def generate_launch_description():
         parameters=[{'use_sim_time': use_sim_time}],
         condition=IfCondition(start_rviz)
     )
+
+    # Static world -> odom TF (identity)
+    static_tf_world_odom = Node(
+        package='tf2_ros',
+        executable='static_transform_publisher',
+        name='world_to_odom',
+        arguments=['0', '0', '0', '0', '0', '0', 'world', 'odom'],
+        parameters=[{'use_sim_time': use_sim_time}]
+    )
+
+    # Publish odom -> base_footprint TF from /odom (connects odom to robot)
+    odom_to_tf_node = Node(
+        package='gem_gazebo',
+        executable='odom_to_tf.py',
+        name='odom_to_tf',
+        parameters=[{'use_sim_time': use_sim_time}]
+    )
     
     return LaunchDescription([
         # Arguments
@@ -200,6 +217,8 @@ def generate_launch_description():
         gazebo_launch,
         ros_gz_bridge,
         ros_gz_image_bridge,
+        static_tf_world_odom,
+        odom_to_tf_node,
         delayed_vehicle_launch,
         rviz_node,
     ])

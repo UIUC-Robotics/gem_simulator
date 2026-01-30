@@ -16,7 +16,8 @@
   <depend>launch_ros</depend>
   <depend>ros_gz_sim</depend>
   <depend>ros_gz_bridge</depend>
-  
+  <exec_depend>tf2_ros</exec_depend>
+
   <export>
     <build_type>ament_cmake</build_type>
   </export>
