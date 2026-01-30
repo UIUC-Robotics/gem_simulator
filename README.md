@@ -111,6 +111,10 @@ This project features the simulation of a Polaris Gem E2 vehicle with **Ackerman
    # in different terminal
    ros2 topic pub -r 10 /ackermann_cmd ackermann_msgs/msg/AckermannDrive \
    "{steering_angle: 0.35, steering_angle_velocity: 0.5, speed: 1.0, acceleration: 0.5}"
+
+   # or for Teleop cmds
+   source install/setup.zsh
+   ros2 launch gem_launch gem_drive.launch.py
    ```
 
 <!-- ### 2. SLAM (Simultaneous Localization and Mapping)

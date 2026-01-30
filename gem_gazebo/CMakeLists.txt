@@ -37,9 +37,8 @@ find_package(joint_state_broadcaster REQUIRED)
 # Install Python executables
 install(PROGRAMS
   scripts/gem_control.py
-  scripts/gem_sensor_info.py
-  scripts/test_controllers.py
   scripts/odom_to_tf.py
+  scripts/drive.py
   DESTINATION lib/${PROJECT_NAME}
 )
 
