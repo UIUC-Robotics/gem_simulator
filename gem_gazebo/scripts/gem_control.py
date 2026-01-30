@@ -83,16 +83,26 @@ class GEMController(Node):
 
         self.cmd_timeout = self.declare_parameter('cmd_timeout', 0.5).value
 
-        # Get link positions
-        ls = self.get_link_position(left_steer_link) 
-        rs = self.get_link_position(right_steer_link) 
+        # Get link positions in right_rear_link frame (link, reference_frame)
+        default_wheelbase = 1.75
+        ls = self.get_link_position(left_steer_link)
+        rs = self.get_link_position(right_steer_link)
         lrw = self.get_link_position(left_rear_link)
-        rrw = np.array([0.0] * 3)
+        rrw = self.get_link_position(right_rear_link)
 
-        self.steer_joint_dist_div_2 = np.linalg.norm(ls-rs)/2.0
-        self.wheelbase = np.linalg.norm((ls+rs)/2.0 - (lrw+rrw)/2.0)
-        # self.wheelbase = 1.75
-        self.get_logger().info(f"Wheelbase set to {self.wheelbase:.2f} using transforms")
+        if (np.all(ls == 0) and np.all(rs == 0)) or (np.all(lrw == 0) and np.all(rrw == 0)):
+            self.wheelbase = default_wheelbase
+            self.get_logger().warn(
+                f"Could not get link transforms (model may not be spawned yet). "
+                f"Using default wheelbase {default_wheelbase} m."
+            )
+        else:
+            front_center = (ls + rs) / 2.0
+            rear_center = (lrw + rrw) / 2.0
+            self.wheelbase = float(np.linalg.norm(front_center - rear_center))
+            self.get_logger().info(f"Wheelbase set to {self.wheelbase:.2f} using transforms")
+
+        self.steer_joint_dist_div_2 = np.linalg.norm(ls - rs) / 2.0
         self.wheelbase_inv = 1 / (self.wheelbase*1.0)
         self.wheelbase_sqr = self.wheelbase**2
 
@@ -197,9 +207,8 @@ class GEMController(Node):
             
         while attempt < max_attempts:
             try:
-                # Wait for transform to be available with a timeout
-                # self.get_logger().info(f"Looking up transform from {reference_frame} to {link}")
-                trans = self.tf_buffer.lookup_transform(reference_frame, link, rclpy.time.Time())
+                # Position of link in reference_frame: (link, reference_frame)
+                trans = self.tf_buffer.lookup_transform(link, reference_frame, rclpy.time.Time())
                 return np.array([trans.transform.translation.x, trans.transform.translation.y, trans.transform.translation.z])
             except Exception as e:
                 attempt += 1
