@@ -8,7 +8,7 @@ This project features the simulation of a Polaris Gem E2 vehicle with **Ackerman
 
 ## Table of Contents
 
-- [Ackermann Steering Vehicle Simulation in ROS2 with Gazebo Sim Ignition](#ackermann-steering-vehicle-simulation-in-ros2-with-gazebo-sim-ignition)
+<!--- - [Ackermann Steering Vehicle Simulation in ROS2 with Gazebo Sim Ignition](#ackermann-steering-vehicle-simulation-in-ros2-with-gazebo-sim-ignition) --->
 - [Features](#features)
 
   - [1 Ackermann Steering](#1-ackermann-steering)
@@ -19,10 +19,10 @@ This project features the simulation of a Polaris Gem E2 vehicle with **Ackerman
 
   <!-- - [5 Manual Control with external joystick](#5-manual-control-with-external-joystick) -->
 
-  - [4 Visualization](#6-visualization)
+  - [4 Visualization](#4-visualization)
 - [Requirements](#requirements)
 - [Local Installation](#local-installation)
-- [Docker Installation](#docker-installation)
+<!--- - [Docker Installation](#docker-installation) --->
 - [Usage](#usage)
 
   - [1 Basic Simulation and Manual Control](#1-basic-simulation-and-manual-control)
@@ -84,38 +84,48 @@ This project features the simulation of a Polaris Gem E2 vehicle with **Ackerman
 
 ## Local Installation
 
-0. Your need to sure that installation of Gazebo Ignition and ROS (ros_gz) for ros2 humble:`<br>`
-   `sudo apt-get install ros-${ROS_DISTRO}-ros-gz<br>`
-   `sudo apt-get install ros-${ROS_DISTRO}-gz-ros2-control<br>`
+### 0. Make sure you have Gazebo Ignition and ROS–Gazebo integration (`ros_gz`) installed for ROS 2 Humble:
 
-   More details about installation Gazebo and ROS: `<a href="https://gazebosim.org/docs/latest/ros_installation/">`Link `</a>`
-1. Clone the repository:`<br>`
-   `mkdir -p gem_sim/src && cd gem_sim/src<br>`
-   `git clone https://github.com/UIUC-Robotics/gem_simulator.git<br>``cd ..`
-2. Build the project:
-   `colcon build --symlink-install && source install/setup.bash`
+  ```bash
+  sudo apt-get install ros-${ROS_DISTRO}-ros-gz
+  sudo apt-get install ros-${ROS_DISTRO}-gz-ros2-control
+  ```
+
+   More details about installing Gazebo and ROS:  [Link](https://gazebosim.org/docs/latest/ros_installation/)
+
+### 1. Clone the repository:
+  ```bash
+  mkdir -p gem_sim/src
+  cd gem_sim/src
+  git clone https://github.com/UIUC-Robotics/gem_simulator.git
+  cd ..
+  ```
+### 2. Build the project:
+  ```bash
+  colcon build --symlink-install && source install/setup.bash
+  ```
 
 ## Usage
 
 ### 1. Basic Simulation and Manual Control
 
-1. Launch the simulation:
-   ```bash
-   ros2 launch gem_launch gem_init.launch.py
-
-   # or to specify the world
-   ros2 launch gem_launch gem_init.launch.py world_name:=silverstone.world
-   ```
-2. Control car:
-   ```bash
-   # in different terminal
-   ros2 topic pub -r 10 /ackermann_cmd ackermann_msgs/msg/AckermannDrive \
-   "{steering_angle: 0.35, steering_angle_velocity: 0.5, speed: 1.0, acceleration: 0.5}"
-
-   # or for Teleop cmds
-   source install/setup.zsh
-   ros2 launch gem_launch gem_drive.launch.py
-   ```
+  ####  Launch the simulation:
+     ```bash
+     ros2 launch gem_launch gem_init.launch.py
+  
+     # or to specify the world
+     ros2 launch gem_launch gem_init.launch.py world_name:=silverstone.world
+     ```
+  ####  Control car:
+     ```bash
+     # in different terminal
+     ros2 topic pub -r 10 /ackermann_cmd ackermann_msgs/msg/AckermannDrive \
+     "{steering_angle: 0.35, steering_angle_velocity: 0.5, speed: 1.0, acceleration: 0.5}"
+  
+     # or for Teleop cmds
+     source install/setup.zsh
+     ros2 launch gem_launch gem_drive.launch.py
+     ```
 
 <!-- ### 2. SLAM (Simultaneous Localization and Mapping)
 
