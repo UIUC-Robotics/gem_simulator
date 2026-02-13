@@ -13,9 +13,10 @@
 
       <collision name="collision">
         <geometry>
-          <mesh>
-            <uri>model://silverstone/meshes/silverstone.dae</uri>
-          </mesh>
+          <plane>
+            <normal>0 0 1</normal>
+            <size>500 500</size>
+          </plane>
         </geometry>
       </collision>
     </link>

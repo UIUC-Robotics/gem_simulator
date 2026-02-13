@@ -16,35 +16,12 @@ from launch.actions import SetEnvironmentVariable
 
 def generate_launch_description():
     # Declare arguments
-    paused_arg = DeclareLaunchArgument(
-        'paused',
-        default_value='false',
-        description='Start Gazebo paused'
-    )
-    
     use_sim_time_arg = DeclareLaunchArgument(
         'use_sim_time',
         default_value='true',
         description='Use simulation time'
     )
     
-    gui_arg = DeclareLaunchArgument(
-        'gui',
-        default_value='true',
-        description='Start Gazebo GUI'
-    )
-    
-    headless_arg = DeclareLaunchArgument(
-        'headless',
-        default_value='false',
-        description='Run in headless mode'
-    )
-    
-    debug_arg = DeclareLaunchArgument(
-        'debug',
-        default_value='false',
-        description='Enable debug mode'
-    )
     world_name_arg = DeclareLaunchArgument(
         'world_name',
         default_value='smaller_track.world',
@@ -78,8 +55,6 @@ def generate_launch_description():
 
     
     # Get launch configurations
-    paused = LaunchConfiguration('paused')
-    gui = LaunchConfiguration('gui')
     world_name = LaunchConfiguration('world_name')
     x = LaunchConfiguration('x')
     y = LaunchConfiguration('y')
@@ -97,7 +72,7 @@ def generate_launch_description():
     )
     set_gz_version = SetEnvironmentVariable(
         name='GZ_SIM_VERSION',
-        value='ignition'  # or your installed version
+        value='8'
     )
     # Full path to world file so Gazebo can find it when user passes e.g. world_name:=silverstone.world
     world_path = PathJoinSubstitution([FindPackageShare('gem_gazebo'), 'worlds', world_name])
@@ -197,11 +172,7 @@ def generate_launch_description():
     
     return LaunchDescription([
         # Arguments
-        paused_arg,
         use_sim_time_arg,
-        gui_arg,
-        headless_arg,
-        debug_arg,
         world_name_arg,
         x_arg,
         y_arg,

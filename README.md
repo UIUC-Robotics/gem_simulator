@@ -113,8 +113,8 @@ This project features the simulation of a Polaris Gem E2 vehicle with **Ackerman
      ```bash
      ros2 launch gem_launch gem_init.launch.py
   
-     # or to specify the world
-     ros2 launch gem_launch gem_init.launch.py world_name:=silverstone.world
+     # launch with parameters
+     ros2 launch gem_launch gem_init.launch.py x:=0 y:=0 yaw:=0.9 world_name:=silverstone.world
      ```
   ####  Control car:
      ```bash

@@ -1,12 +1,12 @@
 <sdf version="1.9">
-  <model name="smaller_track">
+  <model name="oschersleben">
     <static>true</static>
 
     <link name="link">
       <visual name="visual">
         <geometry>
           <mesh>
-            <uri>model://smaller_track/meshes/smaller_track.dae</uri>
+            <uri>model://oschersleben/meshes/Oschersleben.dae</uri>
           </mesh>
         </geometry>
       </visual>
