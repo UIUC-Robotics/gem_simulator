@@ -110,14 +110,14 @@ This project features the simulation of a Polaris Gem E2 vehicle with **Ackerman
 ### 1. Basic Simulation and Manual Control
 
   ####  Launch the simulation:
-     ```bash
+  ```bash
      ros2 launch gem_launch gem_init.launch.py
   
      # launch with parameters
      ros2 launch gem_launch gem_init.launch.py x:=0 y:=0 yaw:=0.9 world_name:=silverstone.world
-     ```
+ ```
   ####  Control car:
-     ```bash
+  ```bash
      # in different terminal
      ros2 topic pub -r 10 /ackermann_cmd ackermann_msgs/msg/AckermannDrive \
      "{steering_angle: 0.35, steering_angle_velocity: 0.5, speed: 1.0, acceleration: 0.5}"
@@ -125,13 +125,13 @@ This project features the simulation of a Polaris Gem E2 vehicle with **Ackerman
      # or for Teleop cmds
      source install/setup.zsh
      ros2 launch gem_launch gem_drive.launch.py
-     ```
+  ```
 
 <!-- ### 2. SLAM (Simultaneous Localization and Mapping)
 
 -   To run SLAM Toolbox for mapping, launch the following after starting the simulation:
     ```bash
-    ros2 launch saye_bringup slam.launch.py
+      ros2 launch saye_bringup slam.launch.py
     ```
     [![SLAM- Youtube](https://img.youtube.com/vi/QWcJ9TlqFOU/0.jpg)](https://www.youtube.com/watch?v=QWcJ9TlqFOU "Proje Tanıtımı")
 
@@ -139,7 +139,7 @@ This project features the simulation of a Polaris Gem E2 vehicle with **Ackerman
 
 -   To run the simulation with the Nav2 stack for autonomous navigation, launch the following after starting the simulation:
     ```bash
-    ros2 launch saye_bringup navigation_bringup.launch.py
+      ros2 launch saye_bringup navigation_bringup.launch.py
     ```
     [![Autonomus Navigation - Youtube](https://img.youtube.com/vi/SJ4NrbdlNZo/0.jpg)](https://www.youtube.com/watch?v=SJ4NrbdlNZo "NAV2")
 
