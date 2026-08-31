@@ -22,8 +22,8 @@
       <heading_deg>0</heading_deg>
     </spherical_coordinates>
     <plugin
-      filename="libignition-gazebo-navsat-system.so"
-      name="ignition::gazebo::systems::NavSat">
+      filename="gz-sim-navsat-system"
+      name="gz::sim::systems::NavSat">
     </plugin>
     <gravity>0 0 -9.8000000000000007</gravity>
     <magnetic_field>5.5644999999999998e-06 2.2875799999999999e-05 -4.2388400000000002e-05</magnetic_field>
@@ -36,7 +36,6 @@
       <origin_visual>false</origin_visual>
       <sky>false</sky>
       <fog>false</fog>
-      <anisotropic_filtering>16</anisotropic_filtering>
     </scene>
     <include>
       <uri>model://highbay_track</uri>

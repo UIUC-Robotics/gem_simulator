@@ -85,6 +85,7 @@ def generate_launch_description():
             ])
         ]),
         launch_arguments={'gz_args': ['-r -v1 ', world_path],
+        'gz_version': '8',
         'on_exit_shutdown': 'true'
         }.items()
     )
@@ -130,9 +131,9 @@ def generate_launch_description():
     )
     
     # Delay vehicle launch to ensure Gazebo is ready
-    # Wait 3 seconds after Gazebo starts before spawning entity
+    # Wait 4 seconds after Gazebo starts before spawning entity
     delayed_vehicle_launch = TimerAction(
-        period=3.0,
+        period=4.0,
         actions=[vehicle_launch]
     )
     
@@ -158,7 +159,9 @@ def generate_launch_description():
         package='tf2_ros',
         executable='static_transform_publisher',
         name='world_to_odom',
-        arguments=['0', '0', '0', '0', '0', '0', 'world', 'odom'],
+        arguments=['--x', '0', '--y', '0', '--z', '0',
+                   '--yaw', '0', '--pitch', '0', '--roll', '0',
+                   '--frame-id', 'world', '--child-frame-id', 'odom'],
         parameters=[{'use_sim_time': use_sim_time}]
     )
 

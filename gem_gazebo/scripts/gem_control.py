@@ -40,8 +40,7 @@ class GEMController(Node):
         super().__init__('gem_ackermann_controller')
 
         # Initialize all variables at the beginning
-        self.right_rear_link = None
-        self.ackermann_cmd_lock = threading.Lock()  # Initialize the lock here
+        self.ackermann_cmd_lock = threading.Lock()
         self.steer_ang = 0.0   
         self.steer_ang_vel = 0.0   
         self.speed = 0.0
@@ -74,8 +73,6 @@ class GEMController(Node):
         (right_rear_link, right_rear_wheel_controller, self.right_rear_inv_circ) =  \
             self.get_rear_wheel_params("right_rear_wheel")
 
-        self.right_rear_link = right_rear_link
-
         # ROS2 service client for controller manager
         self.list_controllers_client = self.create_client(ListControllers, 'controller_manager/list_controllers')
         while not self.list_controllers_client.wait_for_service(timeout_sec=1.0):
@@ -83,14 +80,16 @@ class GEMController(Node):
 
         self.cmd_timeout = self.declare_parameter('cmd_timeout', 0.5).value
 
-        # Get link positions in right_rear_link frame (link, reference_frame)
+        # Get wheel link positions in base_link frame to compute wheelbase and track width.
+        # base_link is used as the reference frame because it is fixed and non-rotating,
+        # giving consistent results regardless of joint state at startup.
         default_wheelbase = 1.75
         ls = self.get_link_position(left_steer_link)
         rs = self.get_link_position(right_steer_link)
         lrw = self.get_link_position(left_rear_link)
         rrw = self.get_link_position(right_rear_link)
 
-        if (np.all(ls == 0) and np.all(rs == 0)) or (np.all(lrw == 0) and np.all(rrw == 0)):
+        if np.all(ls == 0) or np.all(rs == 0) or np.all(lrw == 0) or np.all(rrw == 0):
             self.wheelbase = default_wheelbase
             self.get_logger().warn(
                 f"Could not get link transforms (model may not be spawned yet). "
@@ -197,25 +196,19 @@ class GEMController(Node):
         max_attempts = 10
         attempt = 0
         retry_delay = 0.5  # seconds
-        
-        if not self.right_rear_link:
-            # If right_rear_link is not set yet, use 'base_link' as a fallback
-            self.get_logger().warn("right_rear_link is not set, using base_link instead")
-            reference_frame = 'base_link'
-        else:
-            reference_frame = self.right_rear_link
-            
+
         while attempt < max_attempts:
             try:
-                # Position of link in reference_frame: (link, reference_frame)
-                trans = self.tf_buffer.lookup_transform(link, reference_frame, rclpy.time.Time())
+                # Get position of `link` expressed in base_link frame.
+                # base_link is a non-rotating frame, so all 4 wheel positions
+                # are in the same coordinate system regardless of joint state.
+                trans = self.tf_buffer.lookup_transform('base_link', link, rclpy.time.Time())
                 return np.array([trans.transform.translation.x, trans.transform.translation.y, trans.transform.translation.z])
             except Exception as e:
                 attempt += 1
                 self.get_logger().info(f"Waiting for transform: {str(e)}, attempt {attempt}/{max_attempts}")
                 if attempt >= max_attempts:
                     self.get_logger().error(f"Could not get transform after {max_attempts} attempts, returning zeros, check if model spawned")
-                    # Return zeros as a fallback to prevent complete failure
                     return np.array([0.0, 0.0, 0.0])
                 rclpy.spin_once(self, timeout_sec=retry_delay)
 

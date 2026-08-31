@@ -155,7 +155,7 @@ def generate_launch_description():
 
     # Delay gem_control until after spawn + controller_spawner (model and controllers must be up)
     delayed_ackermann = TimerAction(
-        period=2.0,
+        period=4.0,
         actions=[ackermann_controller]
     )
     

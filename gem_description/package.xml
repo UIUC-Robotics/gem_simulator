@@ -15,7 +15,7 @@
   <depend>xacro</depend>
   <depend>robot_state_publisher</depend>
   <depend>joint_state_publisher</depend>
-  <depend>gz-ros2-control</depend>
+  <depend>gz_ros2_control</depend>
   <depend>hardware_interface</depend>
   <depend>transmission_interface</depend>
   
