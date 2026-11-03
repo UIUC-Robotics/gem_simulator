@@ -52,3 +52,10 @@
   ros_type_name: "sensor_msgs/msg/NavSatFix"
   gz_type_name: "gz.msgs.NavSat"
   direction: GZ_TO_ROS
+
+# gz topic published by Contact sensor on the chassis (only publishes while in contact)
+- ros_topic_name: "collision"
+  gz_topic_name: "collision"
+  ros_type_name: "ros_gz_interfaces/msg/Contacts"
+  gz_type_name: "gz.msgs.Contacts"
+  direction: GZ_TO_ROS

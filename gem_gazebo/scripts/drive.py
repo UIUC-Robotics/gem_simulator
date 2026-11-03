@@ -83,13 +83,13 @@ def main():
     parser.add_argument(
         "--max_speed",
         type=float,
-        default=6.0,
+        default=3.0,
         help="Max speed (m/s)",
     )
     parser.add_argument(
         "--max_steer",
         type=float,
-        default=0.8,
+        default=1.0,
         help="Max steering angle (rad)",
     )
     args = parser.parse_args()

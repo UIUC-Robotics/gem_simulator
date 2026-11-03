@@ -38,6 +38,7 @@ find_package(joint_state_broadcaster REQUIRED)
 install(PROGRAMS
   scripts/gem_control.py
   scripts/odom_to_tf.py
+  scripts/collision_events.py
   scripts/drive.py
   DESTINATION lib/${PROJECT_NAME}
 )
